@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Projeto CEP</title>
+    <!-- Bootstrap via CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Angular.js via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
+    <!-- App JS -->
+    <script src="public/js/app.js"></script>
+</head>
+<body ng-app="cepApp" ng-controller="cepController">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Projeto CEP</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form">
+                    <div class="form-group">
+                        <label for="cep">
+                            CEP
+                        </label>
+                        <input type="text" class="form-control" id="cep" pattern="[0-9]{8}" 
+                        required maxlength="8" title="Informe o CEP sem pontos ou traços" ng-model="dados.cep" />
+                        <!-- Dados: {{dados}} -->
+                    </div>
+                    <button type="button" ng-disabled="!dados.cep" ng-click="buscaCep(dados.cep)" class="btn btn-primary">Consultar CEP</button>
+                    <!-- campos preenchidos automaticamente-->
+                    <br><br> <!-- quebra de linha -->
+                    <!-- Mensagem de load -->
+                    <div class="alert alert-warning" ng-show="aguarde">
+                        <p class="text-warning">
+                            Aguarde, enquanto localizamos o CEP...
+                        </p>
+                    </div>
+                    <!-- Mensagem de erro -->
+                    <div class="alert alert-danger" ng-show="erro">
+                        <p class="text-danger">
+                            Erro: O CEP informado não existe!
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="logradouro">
+                            Logradouro
+                        </label>
+                        <input type="text" class="form-control" id="logradouro" ng-model="dados.logradouro" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label for="bairro">
+                            Bairro
+                        </label>
+                        <input type="text" class="form-control" id="bairro" ng-model="dados.bairro" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label for="cidade">
+                            Cidade
+                        </label>
+                        <input type="text" class="form-control" id="cidade" ng-model="dados.localidade" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">
+                            Estado
+                        </label>
+                        <input type="text" class="form-control" id="estado" ng-model="dados.uf" disabled />
+                    </div>
+                    <button type="button" ng-disabled="!dados.localidade" ng-click="buscaClima(dados.localidade)" class="btn btn-primary">Consultar Clima</button>
+                    <br><br> <!-- quebra de linha -->
+                    <div class="form-group">
+                        <label for="clima">
+                            Clima
+                        </label>
+                        <input type="text" class="form-control" id="clima" ng-model="dadosClima.weather[0].description" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label for="temperatura">
+                            Temperatura
+                        </label>
+                        <input type="text" class="form-control" id="temperatura" ng-model="dadosClima.main.temp" disabled />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
